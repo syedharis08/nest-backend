@@ -30,7 +30,7 @@ export class ItemsController {
       if(productIndex===-1) throw new HttpException("No products against this id",HttpStatus.NOT_FOUND)
       const product=jsonData[productIndex]
       product.amount_discounted=itemDto.rate
-      product.amount=parseFloat((product.amount-(product.amount*itemDto.rate)).toFixed(2))
+      product.amount=parseFloat((product.amount+(product.amount*itemDto.rate)).toFixed(2))
       jsonData[productIndex]=product
     }
     fs.writeFileSync(path.join(__dirname,"products.json"),JSON.stringify(jsonData))
